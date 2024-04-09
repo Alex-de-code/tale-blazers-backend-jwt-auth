@@ -12,7 +12,7 @@ function generateToken(user) {
     expiresIn: "1h", // Token expires in 1 hour
   };
 
-  return jwt.sign(payload, secret, options);
+  return jwt.sign(payload, secret, options); // token is created
 }
 
 module.exports = { generateToken };

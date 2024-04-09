@@ -16,4 +16,22 @@ CREATE TABLE users (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE story_beginnings (
+    id SERIAL PRIMARY KEY,
+    account_id integer, 
+    title VARCHAR(200), 
+    genre VARCHAR(50),
+    description VARCHAR(255), 
+    body text 
+); 
+
+CREATE TABLE story_endings (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(200), 
+    body text, 
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    story_beginnings_id integer,
+    account_id integer
+); 
+
 
