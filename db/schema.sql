@@ -34,7 +34,7 @@ CREATE TABLE story_endings (
     body TEXT, 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (story_beginnings_id) REFERENCES story_beginnings(id),
-    FOREIGN KEY user_id REFERENCES user(id)
+    FOREIGN KEY (user_id) REFERENCES user(id)
 ); 
 
 
