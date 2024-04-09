@@ -5,6 +5,7 @@ const cron = require("node-cron");
 const cookieParser = require("cookie-parser");
 
 const authController = require("./controllers/authController");
+const storyBeginningsController = require("./controllers/storyBeginningsController");
 
 // CONFIGURATION
 const app = express();
@@ -28,10 +29,11 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authController);
+app.use("/api/story_beginnings", storyBeginningsController);
 
 // ROUTES
 app.get("/", (_req, res) => {
-  res.send("Welcome to JWT Auth!");
+  res.send("Welcome to Tale Blazers!");
 });
 
 // 404 PAGE
