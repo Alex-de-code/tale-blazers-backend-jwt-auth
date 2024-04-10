@@ -27,13 +27,20 @@ story_endings.get("/", async (req, res) => {
 });
 
 // all endings for a specific story
-story_endings.get("/", async (req, res) => {
+story_endings.get("/:id", async (req, res) => {
+  const { id } = req.params;
   try {
     const allStoryEndingsForASpecificStory =
-      await getStoryEndingsByStoryBeginningId();
-    res.status(200).json(allStoryEndingsForASpecificStory);
+      await getStoryEndingsByStoryBeginningId(id);
+    if (allStoryEndingsForASpecificStory) {
+      res.status(200).json(allStoryEndingsForASpecificStory);
+    } else {
+      res
+        .status(404)
+        .json({ error: "Story ending not found for story with this ID" });
+    }
   } catch (error) {
-    return error;
+    res.status(500).json({ error: "Server error" });
   }
 });
 
@@ -48,6 +55,33 @@ story_endings.post(
       res.status(201).json(newStoryEnding);
     } catch (error) {
       return error;
+    }
+  }
+);
+
+// delete a story ending
+story_endings.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedStoryEnding = await deleteStoryEndingById(id);
+    res.status(200).json(deletedStoryEnding);
+  } catch (error) {
+    res.status(404).json({ error: "Story ending not found with this ID" });
+  }
+});
+
+// update a story ending
+story_endings.put(
+  "/:id",
+  validateStoryEndingTitle,
+  validateStoryEndingBody,
+  async (req, res) => {
+    const { id } = req.params;
+    try {
+      const updatedStoryEnding = await updateStoryEndingsbyId(id);
+      res.status(200).json(updatedStoryEnding);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
     }
   }
 );

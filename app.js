@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 
 const authController = require("./controllers/authController");
 const storyBeginningsController = require("./controllers/storyBeginningsController");
+const storyEndingsController = require("./controllers/storyEndingsController");
 
 // CONFIGURATION
 const app = express();
@@ -30,6 +31,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authController);
 app.use("/api/story_beginnings", storyBeginningsController);
+app.use("/api/story_endings", storyEndingsController);
 
 // ROUTES
 app.get("/", (_req, res) => {
