@@ -27,7 +27,19 @@ const createUser = async ({ username, passwordHash, email }) => {
   return newUser;
 };
 
+const deleteUserById = async ({ id }) => {
+  try {
+    const deletedUser = await db.one(
+      "DELETE FROM users WHERE id = $1 RETURNING *",
+      id
+    );
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   findUserByUsername,
   createUser,
+  deleteUserById,
 };

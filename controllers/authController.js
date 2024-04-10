@@ -1,7 +1,11 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/token");
-const { findUserByUsername, createUser } = require("../queries/users");
+const {
+  findUserByUsername,
+  createUser,
+  deleteUserById,
+} = require("../queries/users");
 const { authenticateToken } = require("../middlewares/authenticateToken");
 const auth = express.Router();
 
@@ -107,6 +111,16 @@ auth.get("/user", authenticateToken, async (req, res) => {
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+auth.delete("/:id", authenticateToken, async (req, res) => {
+  const { id } = req.body;
+  try {
+    const deletedUser = await deleteUserById(id);
+    res.status(200).json(deletedUser);
+  } catch (error) {
+    res.status(404).json({ error: "Story ending not found with this ID" });
   }
 });
 
