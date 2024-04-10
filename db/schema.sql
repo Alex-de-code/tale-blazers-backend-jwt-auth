@@ -20,7 +20,7 @@ CREATE TABLE users (
 
 CREATE TABLE story_beginnings (
     id SERIAL PRIMARY KEY,
-    account_id integer, 
+    user_id INTEGER REFERENCES users(id), 
     title VARCHAR(200), 
     genre VARCHAR(50),
     description VARCHAR(255), 

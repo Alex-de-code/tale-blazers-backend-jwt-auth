@@ -13,7 +13,7 @@ VALUES
 
 -- Inserting story beginnings data
 
-INSERT INTO story_beginnings (account_id, title, genre, description, body, created_at)
+INSERT INTO story_beginnings (user_id, title, genre, description, body, created_at)
 VALUES 
 (1, 'The Forgotten City', 'Fantasy', 'Explore the ancient ruins of a forgotten civilization', 'As I stepped through the overgrown archway, I was immediately struck by the grandeur of the crumbling structures before me. Moss-covered statues loomed in the shadows, their faces weathered by centuries of neglect. The air was heavy with the scent of decay, yet there was an undeniable sense of magic lingering in the air. I knew that within these ruins lay the secrets of a lost civilization, waiting to be unearthed...', '2024-04-01 08:30:00'),
 (2, 'The Abandoned Lab', 'Sci-Fi', 'Unravel the mysteries of a long-forgotten laboratory', 'Deep within the forest, hidden from prying eyes, lay the abandoned lab, its rusted doors beckoning me to uncover its secrets. As I cautiously made my way inside, the air grew stale and musty. Broken equipment littered the floor, covered in a thick layer of dust. Strange symbols adorned the walls, their meanings lost to time. It was clear that whatever experiments had taken place here were far beyond my understanding, but I couldn`t shake the feeling that I was being watched...', '2024-04-02 11:00:00'),
@@ -22,7 +22,7 @@ VALUES
 (5, 'The Alien Encounter', 'Sci-Fi', 'Confront extraterrestrial lifeforms on a distant planet', 'As I gazed up at the alien sky, I couldn`t shake the feeling of being watched. Little did I know, I was about to come face to face with beings from beyond the stars. A strange humming filled the air, and before I knew it, a beam of light enveloped me, transporting me to an alien world unlike anything I had ever seen. Strange flora and fauna surrounded me, their forms both beautiful and terrifying. And looming in the distance, I saw them – the aliens. With their advanced technology and otherworldly presence, I knew that this encounter would change everything...', '2024-04-05 17:00:00');
 
 -- Inserting story endings data
-INSERT INTO story_endings (title, body, created_at, story_beginnings_id, account_id)
+INSERT INTO story_endings (title, body, created_at, story_beginnings_id, user_id)
 VALUES 
 ('Discovery of the Ancient Artifact', 'With a sense of trepidation, I stepped forward into the darkness, ready to uncover the mysteries hidden within the forgotten city. After hours of exploration, I finally stumbled upon a chamber buried deep beneath the ruins. There, illuminated by a faint glow, lay the ancient artifact - a relic of untold power and significance. As I reached out to touch it, I felt a surge of energy coursing through me, and I knew that my destiny had been forever changed by this discovery.', '2024-04-03 09:15:00', 1, 1),
 ('Unearthing of Mystical Energy', 'As I explored deeper into the ruins, I stumbled upon an ancient artifact, pulsing with magical energy. Little did I know, my journey had only just begun. The artifact seemed to resonate with an otherworldly power, and as I reached out to touch it, I felt a strange connection forming. It was as if the artifact had chosen me for a greater purpose, pulling me into a world of magic and mystery beyond imagination. With newfound determination, I set out to unravel the secrets of this ancient relic, knowing that my destiny awaited me.', '2024-04-03 09:30:00', 1, 2),
