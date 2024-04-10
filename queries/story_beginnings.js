@@ -22,11 +22,11 @@ const getStoryBeginningById = async (id) => {
 };
 
 const createStoryBeginning = async (story_beginning) => {
-  const { title, genre, description, body } = story_beginning;
+  const { title, genre, description, body, user_id } = story_beginning;
   try {
     const newStoryBeginning = await db.one(
-      "INSERT into story_beginnings (title, genre, description, body) VALUES($1, $2, $3, $4) RETURNING *",
-      [title, genre, description, body]
+      "INSERT into story_beginnings (title, genre, description, body, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *",
+      [title, genre, description, body, user_id]
     );
     return newStoryBeginning;
   } catch (error) {

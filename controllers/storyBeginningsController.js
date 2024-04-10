@@ -1,6 +1,9 @@
 const express = require("express");
 const story_beginnings = express.Router();
 
+// import authentication middleware
+const { authenticateToken } = require("../middlewares/authenticateToken.js");
+
 // import queries
 const {
   getAllStoryBeginnings,
@@ -14,7 +17,9 @@ const {
   validateStoryBeginningGenre,
   validateStoryBeginningDescription,
   validateStoryBeginningBody,
+  validateUserId,
 } = require("../validations/checkStoryBeginnings.js");
+const auth = require("./authController.js");
 
 // all story beginnings
 story_beginnings.get("/", async (req, res) => {
@@ -44,12 +49,19 @@ story_beginnings.get("/:id", async (req, res) => {
 //create a story beginning
 story_beginnings.post(
   "/",
+  // apply authentication middleware here
+  // authenticateToken,
+  // validate inputs
   validateStoryBeginningTitle,
   validateStoryBeginningGenre,
   validateStoryBeginningDescription,
   validateStoryBeginningBody,
+  validateUserId,
   async (req, res) => {
     try {
+      // Extract the authenticated user ID from the request object
+      // const user_id = req.user.id;
+      // Create the story beginning with the provided data and user ID
       const newStoryBeginning = await createStoryBeginning(req.body);
       res.status(201).json(newStoryBeginning);
     } catch (error) {

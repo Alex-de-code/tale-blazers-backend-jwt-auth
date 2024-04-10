@@ -14,6 +14,7 @@ const {
 const {
   validateStoryEndingTitle,
   validateStoryEndingBody,
+  validateUserId,
 } = require("../validations/checkStoryEndings.js");
 
 // all story endings
@@ -47,6 +48,7 @@ story_endings.get("/:id", async (req, res) => {
 // create a story ending
 story_endings.post(
   "/",
+  validateUserId,
   validateStoryEndingTitle,
   validateStoryEndingBody,
   async (req, res) => {
@@ -60,7 +62,7 @@ story_endings.post(
 );
 
 // delete a story ending
-story_endings.delete("/:id", async (req, res) => {
+story_endings.delete("/:id", validateUserId, async (req, res) => {
   const { id } = req.params;
   try {
     const deletedStoryEnding = await deleteStoryEndingById(id);
@@ -73,12 +75,15 @@ story_endings.delete("/:id", async (req, res) => {
 // update a story ending
 story_endings.put(
   "/:id",
+  validateUserId,
   validateStoryEndingTitle,
   validateStoryEndingBody,
   async (req, res) => {
     const { id } = req.params;
+    // extract story ending details from request body
+    const story_ending = req.body;
     try {
-      const updatedStoryEnding = await updateStoryEndingsbyId(id);
+      const updatedStoryEnding = await updateStoryEndingsbyId(id, story_ending);
       res.status(200).json(updatedStoryEnding);
     } catch (error) {
       res.status(400).json({ error: error.message });

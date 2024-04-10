@@ -1,3 +1,5 @@
+const { validateUserId } = require("./checkStoryBeginnings");
+
 const validateStoryEndingTitle = (req, res, next) => {
   const { title } = req.body;
   if (!title || title.trim() === "") {
@@ -17,4 +19,5 @@ const validateStoryEndingBody = (req, res, next) => {
 module.exports = {
   validateStoryEndingTitle,
   validateStoryEndingBody,
+  validateUserId,
 };
