@@ -25,7 +25,7 @@ CREATE TABLE story_beginnings (
     genre VARCHAR(50),
     description VARCHAR(255), 
     body TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, 
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 ); 
 
 CREATE TABLE story_endings (
@@ -34,7 +34,7 @@ CREATE TABLE story_endings (
     body TEXT, 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     story_beginnings_id INTEGER REFERENCES story_beginnings(id),
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE, 
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 ); 
 
 
