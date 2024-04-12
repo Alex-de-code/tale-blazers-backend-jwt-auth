@@ -17,13 +17,25 @@ const findUserByUsername = async (username) => {
   }
 };
 
-const createUser = async ({ username, passwordHash, email }) => {
+const createUser = async ({
+  username,
+  passwordHash,
+  email,
+  profile_picture,
+  bio,
+}) => {
   const query = `
-      INSERT INTO users (username, password_hash, email)
-      VALUES ($1, $2,$3)
-      RETURNING id, username, email; 
+      INSERT INTO users (username, password_hash, email, profile_picture, bio)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING id, username, email, profile_picture, bio; 
     `;
-  const newUser = await db.one(query, [username, passwordHash, email]);
+  const newUser = await db.one(query, [
+    username,
+    passwordHash,
+    email,
+    profile_picture,
+    bio,
+  ]);
   return newUser;
 };
 
@@ -33,6 +45,7 @@ const deleteUserById = async ({ id }) => {
       "DELETE FROM users WHERE id = $1 RETURNING *",
       id
     );
+    return deletedUser; // Return the deleted user
   } catch (error) {
     return error;
   }

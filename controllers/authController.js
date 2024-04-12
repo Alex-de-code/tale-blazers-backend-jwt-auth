@@ -40,7 +40,7 @@ auth.post("/login", async (req, res) => {
 
 // Register route
 auth.post("/register", async (req, res) => {
-  const { username, password, email } = req.body;
+  const { username, password, email, profile_picture, bio } = req.body;
   try {
     // Check if user already exists
     const existingUser = await findUserByUsername(username);
@@ -57,6 +57,8 @@ auth.post("/register", async (req, res) => {
       username,
       passwordHash: hashedPassword,
       email,
+      profile_picture,
+      bio,
     });
 
     const token = generateToken(newUser);
@@ -106,6 +108,9 @@ auth.get("/user", authenticateToken, async (req, res) => {
           id: user.id,
           username: user.username,
           email: user.email,
+          profile_picture: user.profile_picture,
+          bio: user.bio,
+          created_at: user.created_at,
         },
       });
   } catch (error) {
