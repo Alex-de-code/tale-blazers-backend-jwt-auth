@@ -32,8 +32,10 @@ story_beginnings.get("/", async (req, res) => {
 });
 
 // single story beginning
-story_beginnings.get("/:id", async (req, res) => {
+// if authenticate token is not part of backend route don't send bearer token
+story_beginnings.get("/:id", authenticateToken, async (req, res) => {
   const { id } = req.params;
+  console.log(req.user);
   try {
     const story_beginning = await getStoryBeginningById(id);
     if (story_beginning) {

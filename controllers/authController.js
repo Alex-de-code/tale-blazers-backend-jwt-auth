@@ -82,6 +82,7 @@ auth.get("/check-auth", authenticateToken, (req, res) => {
   // Assuming authenticateToken middleware adds user info to req.user
 
   if (req.user) {
+    console.log("This is from AUTH!!! ", req.user);
     const { user } = req;
     return res.status(200).json({
       isAuthenticated: true,
@@ -97,6 +98,7 @@ auth.get("/check-auth", authenticateToken, (req, res) => {
 
 auth.get("/user", authenticateToken, async (req, res) => {
   const { user } = req;
+  console.log(user);
   try {
     if (!user) {
       return res.status(404).json({ message: "User not found" });

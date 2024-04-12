@@ -10,6 +10,7 @@ const findUserByUsername = async (username) => {
 
     const user = await db.oneOrNone(query, username);
 
+    // console.log("This is the chosen one:", user);
     return user;
   } catch (error) {
     console.error("Error finding user by username:", error);
