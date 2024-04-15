@@ -38,6 +38,8 @@ story_beginnings.get("/:id", authenticateToken, async (req, res) => {
   console.log(req.user);
   try {
     const story_beginning = await getStoryBeginningById(id);
+    console.log(story_beginning);
+
     if (story_beginning) {
       res.status(200).json(story_beginning);
     } else {

@@ -15,7 +15,12 @@ const getStoryBeginningById = async (id) => {
       "SELECT * FROM story_beginnings WHERE id=$1",
       id
     );
-    return oneStoryBeginning;
+    const { user_id } = oneStoryBeginning;
+    const storyCreator = await db.one(
+      "SELECT username, profile_picture, bio, created_at FROM users WHERE id=$1",
+      user_id
+    );
+    return { story: oneStoryBeginning, creator: storyCreator };
   } catch (error) {
     return error;
   }

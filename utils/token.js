@@ -5,6 +5,10 @@ function generateToken(user) {
     id: user.id, // Use user's unique identifier
     username: user.username,
     email: user.email,
+    bio: user.bio,
+    profile_picture: user.profile_picture,
+    created_at: user.created_at,
+    updated_at: user.updated_at,
   };
 
   const secret = process.env.JWT_SECRET;
