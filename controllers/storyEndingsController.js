@@ -8,6 +8,7 @@ const {
   createStoryEnding,
   deleteStoryEndingById,
   updateStoryEndingsbyId,
+  getSingleStoryEndingByID,
 } = require("../queries/story_endings.js");
 
 // import validatons
@@ -45,6 +46,22 @@ story_endings.get("/:id", async (req, res) => {
   }
 });
 
+// single story ending based on id
+story_endings.get("/single/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const singleStoryEnding = await getSingleStoryEndingByID(id);
+    if (singleStoryEnding) {
+      res.status(200).json(singleStoryEnding);
+    } else {
+      res
+        .status(404)
+        .json({ error: "Single story ending not found for this ID" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
 // create a story ending
 story_endings.post(
   "/",
@@ -62,7 +79,9 @@ story_endings.post(
 );
 
 // delete a story ending
-story_endings.delete("/:id", validateUserId, async (req, res) => {
+story_endings.delete("/single/:id", async (req, res) => {
+  //removed validateUserId as there is no req.body and so it would never get the user_id to even authenticate it
+  console.log("delete controller");
   const { id } = req.params;
   try {
     const deletedStoryEnding = await deleteStoryEndingById(id);
@@ -74,7 +93,7 @@ story_endings.delete("/:id", validateUserId, async (req, res) => {
 
 // update a story ending
 story_endings.put(
-  "/:id",
+  "/single/:id",
   validateUserId,
   validateStoryEndingTitle,
   validateStoryEndingBody,

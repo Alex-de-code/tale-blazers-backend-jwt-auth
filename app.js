@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
-const cron = require("node-cron");
+// const cron = require("node-cron");
 const cookieParser = require("cookie-parser");
 
 const authController = require("./controllers/authController");
@@ -12,12 +12,12 @@ const storyEndingsController = require("./controllers/storyEndingsController");
 const app = express();
 
 // cron job to attempt to prevent render from sleeping
-cron.schedule("*/5 * * * *", () => {
-  const currentTime = new Date().toLocaleString("en-US", {
-    timeZone: "America/New_York",
-  });
-  console.log(`Running a task every 5 minutes. Current time: ${currentTime}`);
-});
+// cron.schedule("*/5 * * * *", () => {
+//   const currentTime = new Date().toLocaleString("en-US", {
+//     timeZone: "America/New_York",
+//   });
+//   console.log(`Running a task every 5 minutes. Current time: ${currentTime}`);
+// });
 
 // MIDDLEWARE change origin to your frontend netlify address for deployment
 app.use(

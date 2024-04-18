@@ -25,6 +25,19 @@ const getStoryEndingsByStoryBeginningId = async (id) => {
   }
 };
 
+// retrieves one story ending based on it's id, also need storybeginning id for sub array of endings
+const getSingleStoryEndingByID = async (id) => {
+  try {
+    const singleStoryEndingByID = await db.one(
+      "SELECT * FROM story_endings WHERE id=$1",
+      id
+    );
+    return singleStoryEndingByID;
+  } catch (error) {
+    return error;
+  }
+};
+
 // create a story ending
 // I want users to only create a title, and body for story ending, based on whatever story beginning a story ending is attached to the story_beginning ID should update to the right story beginning. The creation of the story ending should automicatically be created on ending submission and the id of the user should be stored in the user_id key.
 const createStoryEnding = async (story_ending) => {
@@ -48,6 +61,7 @@ const deleteStoryEndingById = async (id) => {
       "DELETE FROM story_endings WHERE id = $1 RETURNING *",
       id
     );
+    console.log("Deleted Story Ending -->", deletedStoryEnding);
     return deletedStoryEnding;
   } catch (error) {
     return error;
@@ -74,4 +88,5 @@ module.exports = {
   createStoryEnding,
   deleteStoryEndingById,
   updateStoryEndingsbyId,
+  getSingleStoryEndingByID,
 };
