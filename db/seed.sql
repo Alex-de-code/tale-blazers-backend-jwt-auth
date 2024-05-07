@@ -35,3 +35,25 @@ VALUES
 ('Return to Earth', 'With a sense of awe and wonder, I returned home, forever changed by my encounter with extraterrestrial life. The universe had become a much bigger place, filled with wonders beyond imagining. Though my journey among the stars had been brief, it had left an indelible mark upon my soul, filling me with a sense of wonder and possibility that I had never known before. And as I stepped back onto familiar soil, I knew that I carried with me the knowledge that I was.', '2024-04-07 14:00:00', 5, 1),
 ('Contemplation of the Cosmos', 'As I looked up at the stars, I couldn`t help but wonder what other worlds were out there, waiting to be explored. The adventure was just beginning. With a sense of anticipation and excitement, I gazed into the endless expanse of space, knowing that countless mysteries awaited discovery. Though my journey had brought me back to Earth, my spirit soared among the stars, ready to chart a course through the cosmos and explore the unknown.', '2024-04-07 14:30:00', 5, 2),
 ('Embarking on the Cosmic Journey', 'With a newfound sense of purpose, I set off into the unknown, eager to explore the cosmos and discover what lies beyond. As I boarded the spacecraft and felt the engines roar to life, I knew that I was embarking on the adventure of a lifetime. The stars beckoned to me, promising untold wonders and endless possibilities. With each passing moment, I left behind the familiar confines of Earth and soared towards the infinite expanse of the universe, ready to write my own destiny among the stars.', '2024-04-07 15:00:00', 5, 3);
+
+-- Inserting story endings comments data
+INSERT INTO story_endings_comments (story_endings_id, body, tag, user_id, is_flagged, created_at)
+VALUES 
+(1, 'Wow, what an exhilarating conclusion! I loved the sense of adventure and discovery throughout the story.', 'positive', 2, false, NOW()),
+(1, 'This ending gave me chills! The description of the ancient artifact and its power was incredibly vivid.', 'positive', 3, false, NOW()),
+(1, 'I enjoyed how you left room for the imagination to fill in the blanks. Great job!', 'positive', 4, false, NOW()),
+(2, 'The mystical energy described in this ending was captivating! I was hooked from start to finish.', 'positive', 5, false, NOW()),
+(2, 'I appreciated the attention to detail in describing the magical elements. It really brought the story to life.', 'positive', 6, false, NOW()),
+(2, 'This ending left me wanting more! I can’t wait to see what other adventures await.', 'positive', 1, false, NOW()),
+(3, 'The ending was bittersweet and left me with a sense of longing. I hope to see more from this story in the future.', 'positive', 2, false, NOW()),
+(3, 'I loved the emotional depth in this ending. It felt like the perfect conclusion to the journey.', 'positive', 3, false, NOW()),
+(3, 'The promise of future adventures kept me on the edge of my seat until the very end. Well done!', 'positive', 4, false, NOW()),
+(4, 'This ending was thought-provoking and made me reconsider the impact of our actions on history.', 'positive', 5, false, NOW()),
+(4, 'I enjoyed the twist in this ending! It added an extra layer of complexity to the story.', 'positive', 6, false, NOW()),
+(4, 'The idea of rewriting history was fascinating, and this ending executed it brilliantly!', 'positive', 1, false, NOW()),
+(5, 'The concept of advanced technology was intriguing in this ending. It opens up so many possibilities for future stories.', 'positive', 2, false, NOW()),
+(5, 'I loved how this ending tied back to the theme of scientific discovery. It was a fitting conclusion to the story.', 'positive', 3, false, NOW()),
+(5, 'The description of the advanced technology was incredibly detailed and painted a vivid picture in my mind.', 'positive', 4, false, NOW()),
+(6, 'The haunting atmosphere of the ghost ship was expertly portrayed in this ending. It sent shivers down my spine!', 'positive', 5, false, NOW()),
+(6, 'I enjoyed the sense of closure in this ending, as the protagonist leaves the haunted ship behind and sets off for new adventures.', 'positive', 6, false, NOW()),
+(6, 'The imagery in this ending was fantastic! It felt like I was right there, exploring the haunted ship alongside the protagonist.', 'positive', 1, false, NOW());
