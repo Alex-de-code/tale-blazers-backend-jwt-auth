@@ -30,11 +30,11 @@ const getSingleCommentByID = async (id) => {
 
 // create a comment for a story_ending
 const createStoryEndingComment = async (story_ending_comment) => {
-  const { comment, tag, story_endings_id, user_id } = story_ending_comment;
+  const { body, tag, story_endings_id, user_id } = story_ending_comment;
   try {
     const newComment = await db.one(
-      "INSERT INTO story_endings_comments (comment, tag, story_endings_id, user_id) VALUES($1, $2, $3, $4) RETURNING *",
-      [comment, tag, story_endings_id, user_id]
+      "INSERT INTO story_endings_comments (body, tag, story_endings_id, user_id) VALUES($1, $2, $3, $4) RETURNING *",
+      [body, tag, story_endings_id, user_id]
     );
     return newComment;
   } catch (error) {
@@ -58,11 +58,11 @@ const deleteStoryEndingCommentByID = async (id) => {
 
 // edit a comment
 const updateStoryEndingCommentByID = async (id, comment) => {
-  const { comment, tag, story_endings_id, user_id } = story_ending_comment;
+  const { body, tag, story_endings_id, user_id } = story_ending_comment;
   try {
     const updatedStoryEndingComment = await db.one(
-      "UPDATE story_endings_comments SET comment=$1, tag=$2, story_endings_id=$3, user_id=$4 WHERE id=$5 RETURNING *",
-      [comment, tag, story_endings_id, user_id, id]
+      "UPDATE story_endings_comments SET body=$1, tag=$2, story_endings_id=$3, user_id=$4 WHERE id=$5 RETURNING *",
+      [body, tag, story_endings_id, user_id, id]
     );
     return updatedStoryEndingComment;
   } catch (error) {

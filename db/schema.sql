@@ -42,7 +42,7 @@ CREATE TABLE story_endings (
 CREATE TABLE story_endings_comments (
     id SERIAL PRIMARY KEY, 
     story_endings_id INTEGER REFERENCES story_endings(id),
-    comment TEXT, 
+    body TEXT, 
     tag VARCHAR(50), 
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE, 
     is_flagged BOOLEAN, 
