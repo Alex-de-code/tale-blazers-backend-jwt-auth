@@ -22,8 +22,7 @@ const app = express();
 // MIDDLEWARE change origin to your frontend netlify address for deployment
 app.use(
   cors({
-    // origin: "http://localhost:3000",
-    origin: "https://taleblazers.netlify.app",
+    origin: ["http://localhost:3000", "https://taleblazers.netlify.app"],
   })
 );
 app.use(express.json());
