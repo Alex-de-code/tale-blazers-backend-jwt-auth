@@ -81,7 +81,7 @@ story_endings.post(
 // delete a story ending
 story_endings.delete("/single/:id", async (req, res) => {
   //removed validateUserId as there is no req.body and so it would never get the user_id to even authenticate it
-  console.log("delete controller");
+  // console.log("delete controller");
   const { id } = req.params;
   try {
     const deletedStoryEnding = await deleteStoryEndingById(id);

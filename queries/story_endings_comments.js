@@ -49,7 +49,7 @@ const createStoryEndingComment = async (story_ending_comment) => {
 // delete a comment
 const deleteStoryEndingCommentByID = async (id) => {
   try {
-    const deletedComment = await db.one(
+    const deletedComment = await db.oneOrNone(
       "DELETE FROM story_endings_comments WHERE id = $1 RETURNING *",
       id
     );

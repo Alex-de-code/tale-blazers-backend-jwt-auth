@@ -51,6 +51,7 @@ story_endings_comments.get("/single/:id", async (req, res) => {
 });
 
 // create a comment for story ending
+// remember to add validate user when putting this branch into production!!!
 // valudateUserId
 story_endings_comments.post(
   "/",
@@ -66,5 +67,21 @@ story_endings_comments.post(
     }
   }
 );
+
+story_endings_comments.delete("/single/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedStoryEndingComment = await deleteStoryEndingCommentByID(id);
+    if (deletedStoryEndingComment) {
+      res.status(200).json(deletedStoryEndingComment);
+    } else {
+      res
+        .status(404)
+        .json({ error: "Story ending comment not found with this ID" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 module.exports = story_endings_comments;
