@@ -50,4 +50,21 @@ story_endings_comments.get("/single/:id", async (req, res) => {
   }
 });
 
+// create a comment for story ending
+// valudateUserId
+story_endings_comments.post(
+  "/",
+  validateStoryEndingCommentBody,
+  validateStoryEndingCommentTag,
+
+  async (req, res) => {
+    try {
+      const newStoryEndingComment = await createStoryEndingComment(req.body);
+      res.status(201).json(newStoryEndingComment);
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+);
+
 module.exports = story_endings_comments;
