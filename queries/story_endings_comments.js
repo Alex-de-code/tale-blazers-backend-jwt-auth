@@ -62,7 +62,7 @@ const deleteStoryEndingCommentByID = async (id) => {
 
 // edit a comment
 const updateStoryEndingCommentByID = async (id, comment) => {
-  const { body, tag, story_endings_id, user_id } = story_ending_comment;
+  const { body, tag, story_endings_id, user_id } = comment;
   try {
     const updatedStoryEndingComment = await db.one(
       "UPDATE story_endings_comments SET body=$1, tag=$2, story_endings_id=$3, user_id=$4 WHERE id=$5 RETURNING *",

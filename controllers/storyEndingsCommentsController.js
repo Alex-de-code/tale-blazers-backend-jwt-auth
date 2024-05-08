@@ -84,4 +84,29 @@ story_endings_comments.delete("/single/:id", async (req, res) => {
   }
 });
 
+// update story ending comment
+
+// remember to add validate user when putting this branch into production!!!
+// valudateUserId
+story_endings_comments.put(
+  "/single/:id",
+  // valudateUserId
+  validateStoryEndingCommentBody,
+  validateStoryEndingCommentTag,
+  async (req, res) => {
+    const { id } = req.params;
+    //extract commend details from request body
+    const comment = req.body;
+    try {
+      const updatedStoryEndingComment = await updateStoryEndingCommentByID(
+        id,
+        comment
+      );
+      res.status(200).json(updatedStoryEndingComment);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+);
+
 module.exports = story_endings_comments;
