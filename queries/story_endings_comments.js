@@ -16,9 +16,13 @@ const getAllCommentsByStoryEndingId = async (id) => {
 };
 
 // retrieves one comment based on it's id
+
+// pg-promise OneOrNone = executes a query that expects 0 or 1 rows to be returned. It resolves with the row-object when 1 row is returned, or with null when nothing is returned. When the query returns more than 1 row, the method rejects.
+// When receiving a multi-query result, only the last result is processed, ignoring the rest.
+// --> used this so end point is able to send error message when an id is given for a non existent comment
 const getSingleCommentByID = async (id) => {
   try {
-    const singleCommentByID = await db.one(
+    const singleCommentByID = await db.oneOrNone(
       "SELECT * FROM story_endings_comments WHERE id=$1",
       id
     );

@@ -35,4 +35,19 @@ story_endings_comments.get("/:id", async (req, res) => {
   }
 });
 
+// single comment based on id
+story_endings_comments.get("/single/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const singleComment = await getSingleCommentByID(id);
+    if (singleComment && singleComment !== null) {
+      res.status(200).json(singleComment);
+    } else {
+      res.status(404).json({ error: "No comment found for this ID" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 module.exports = story_endings_comments;
