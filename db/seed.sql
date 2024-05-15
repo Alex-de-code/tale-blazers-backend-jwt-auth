@@ -39,21 +39,23 @@ VALUES
 -- Inserting story endings comments data
 INSERT INTO story_endings_comments (story_endings_id, body, tag, user_id, is_flagged, created_at)
 VALUES 
-(1, 'Wow, what an exhilarating conclusion! I loved the sense of adventure and discovery throughout the story.', 'positive', 2, false, NOW()),
-(1, 'This ending gave me chills! The description of the ancient artifact and its power was incredibly vivid.', 'positive', 3, false, NOW()),
-(1, 'I enjoyed how you left room for the imagination to fill in the blanks. Great job!', 'positive', 4, false, NOW()),
-(2, 'The mystical energy described in this ending was captivating! I was hooked from start to finish.', 'positive', 5, false, NOW()),
-(2, 'I appreciated the attention to detail in describing the magical elements. It really brought the story to life.', 'positive', 6, false, NOW()),
-(2, 'This ending left me wanting more! I can’t wait to see what other adventures await.', 'positive', 1, false, NOW()),
-(3, 'The ending was bittersweet and left me with a sense of longing. I hope to see more from this story in the future.', 'positive', 2, false, NOW()),
-(3, 'I loved the emotional depth in this ending. It felt like the perfect conclusion to the journey.', 'positive', 3, false, NOW()),
-(3, 'The promise of future adventures kept me on the edge of my seat until the very end. Well done!', 'positive', 4, false, NOW()),
-(4, 'This ending was thought-provoking and made me reconsider the impact of our actions on history.', 'positive', 5, false, NOW()),
-(4, 'I enjoyed the twist in this ending! It added an extra layer of complexity to the story.', 'positive', 6, false, NOW()),
-(4, 'The idea of rewriting history was fascinating, and this ending executed it brilliantly!', 'positive', 1, false, NOW()),
-(5, 'The concept of advanced technology was intriguing in this ending. It opens up so many possibilities for future stories.', 'positive', 2, false, NOW()),
-(5, 'I loved how this ending tied back to the theme of scientific discovery. It was a fitting conclusion to the story.', 'positive', 3, false, NOW()),
-(5, 'The description of the advanced technology was incredibly detailed and painted a vivid picture in my mind.', 'positive', 4, false, NOW()),
-(6, 'The haunting atmosphere of the ghost ship was expertly portrayed in this ending. It sent shivers down my spine!', 'positive', 5, false, NOW()),
-(6, 'I enjoyed the sense of closure in this ending, as the protagonist leaves the haunted ship behind and sets off for new adventures.', 'positive', 6, false, NOW()),
-(6, 'The imagery in this ending was fantastic! It felt like I was right there, exploring the haunted ship alongside the protagonist.', 'positive', 1, false, NOW());
+(1, 'Wow, what an exhilarating conclusion! I loved the sense of adventure and discovery throughout the story.', 'praise', 2, false, NOW()),
+(1, 'The description of the ancient artifact and its power was vivid, but the conclusion felt somewhat rushed.', 'feedback', 3, false, NOW()),
+(1, 'I enjoyed how you left room for the imagination to fill in the blanks. Great job!', 'praise', 4, false, NOW()),
+(2, 'The mystical energy described in this ending was captivating, yet the pacing could be improved to sustain the reader’s interest.', 'feedback', 5, false, NOW()),
+(2, 'I appreciated the attention to detail in describing the magical elements. It really brought the story to life.', 'praise', 6, false, NOW()),
+(2, 'While leaving the reader wanting more is a sign of engagement, providing closure could strengthen the narrative.', 'feedback', 1, false, NOW()),
+(3, 'The ending was bittersweet and left me with a sense of longing. I hope to see more from this story in the future.', 'praise', 2, false, NOW()),
+(3, 'The emotional depth in this ending was commendable, yet the conclusion seemed abrupt given the complexity of the journey.', 'feedback', 3, false, NOW()),
+(3, 'The promise of future adventures kept me on the edge of my seat until the very end. Well done!', 'praise', 4, false, NOW()),
+(4, 'This ending was thought-provoking and made me reconsider the impact of our actions on history.', 'praise', 5, false, NOW()),
+(4, 'The twist added complexity to the story, yet its execution could be refined to avoid confusion.', 'feedback', 6, false, NOW()),
+(4, 'While the idea of rewriting history is fascinating, the resolution could benefit from clearer implications.', 'feedback', 1, false, NOW()),
+(5, 'The concept of advanced technology was intriguing, but its integration into the narrative felt somewhat forced.', 'feedback', 2, false, NOW()),
+(5, 'I loved how this ending tied back to the theme of scientific discovery. It was a fitting conclusion to the story.', 'praise', 3, false, NOW()),
+(5, 'The description of the advanced technology was incredibly detailed and painted a vivid picture in my mind.', 'praise', 4, false, NOW()),
+(6, 'The haunting atmosphere of the ghost ship was expertly portrayed in this ending. It sent shivers down my spine!', 'praise', 5, false, NOW()),
+(6, 'The sense of closure in this ending was satisfying, but further development of the protagonist’s emotional journey could amplify its impact.', 'feedback', 6, false, NOW()),
+(6, 'The imagery in this ending was fantastic! It felt like I was right there, exploring the haunted ship alongside the protagonist.', 'praise', 1, false, NOW());
+
+

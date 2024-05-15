@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use("/api/auth", authController);
 app.use("/api/story_beginnings", storyBeginningsController);
 app.use("/api/story_endings", storyEndingsController);
-app.use("/api/story_endings_comments", storyEndingsCommentsController);
+app.use("/api/story_endings/comments", storyEndingsCommentsController);
 
 // ROUTES
 app.get("/", (_req, res) => {

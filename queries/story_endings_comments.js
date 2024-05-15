@@ -4,9 +4,21 @@ const db = require("../db/dbConfig");
 const getAllCommentsByStoryEndingId = async (id) => {
   try {
     const storyEndingCommentsByStoryEndingId = await db.any(
-      "SELECT DISTINCT story_endings_comments.* FROM story_endings_comments " +
-        "JOIN story_endings ON story_endings_comments.story_endings_id = story_endings.id " +
-        "WHERE story_endings.id = $1",
+      // "SELECT DISTINCT story_endings_comments.* FROM story_endings_comments " +
+      //   "JOIN story_endings ON story_endings_comments.story_endings_id = story_endings.id " +
+      //   "WHERE story_endings.id = $1",
+      // [id]
+      // `SELECT *, u.username, u.profile_picture
+      // FROM story_endings_comments sec
+      // JOIN story_endings se ON sec.story_endings_id = se.id
+      // JOIN users u ON sec.user_id = u.id
+      // WHERE se.id = $1`,
+      // [id]
+      `SELECT sec.*, u.username, u.profile_picture
+FROM story_endings_comments sec
+JOIN story_endings ON sec.story_endings_id = story_endings.id
+JOIN users u ON sec.user_id = u.id
+WHERE story_endings.id = $1`,
       [id]
     );
     return storyEndingCommentsByStoryEndingId;

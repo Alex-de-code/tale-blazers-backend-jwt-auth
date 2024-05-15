@@ -55,6 +55,7 @@ story_endings_comments.get("/single/:id", async (req, res) => {
 // valudateUserId
 story_endings_comments.post(
   "/",
+  validateUserId,
   validateStoryEndingCommentBody,
   validateStoryEndingCommentTag,
 
@@ -90,7 +91,7 @@ story_endings_comments.delete("/single/:id", async (req, res) => {
 // valudateUserId
 story_endings_comments.put(
   "/single/:id",
-  // valudateUserId
+  validateUserId,
   validateStoryEndingCommentBody,
   validateStoryEndingCommentTag,
   async (req, res) => {
