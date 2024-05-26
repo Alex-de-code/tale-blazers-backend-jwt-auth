@@ -29,6 +29,32 @@ CREATE TABLE story_beginnings (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 ); 
 
+CREATE TABLE story_beginnings_reactions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    story_beginnings_id INTEGER REFERENCES story_beginnings(id) ON DELETE CASCADE,
+    reaction_type VARCHAR(10), -- 'like', 'dislike', or any other reaction type
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE story_beginnings_comments (
+    id SERIAL PRIMARY KEY, 
+    story_beginnings_id INTEGER REFERENCES story_beginnings(id),
+    body TEXT, 
+    tag VARCHAR(50), 
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE, 
+    is_flagged BOOLEAN, 
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE story_beginnings_comments_reactions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    story_beginnings_comments_id INTEGER REFERENCES story_beginnings_comments(id) ON DELETE CASCADE,
+    reaction_type VARCHAR(10), -- 'like', 'dislike', or any other reaction type
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE story_endings (
     id SERIAL PRIMARY KEY,
     title VARCHAR(200), 
@@ -38,6 +64,15 @@ CREATE TABLE story_endings (
     is_flagged BOOLEAN, 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 ); 
+
+-- Reactions for Story Endings
+CREATE TABLE story_endings_reactions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    story_endings_id INTEGER REFERENCES story_endings(id) ON DELETE CASCADE,
+    reaction_type VARCHAR(10), -- 'like', 'dislike', or any other reaction type
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE story_endings_comments (
     id SERIAL PRIMARY KEY, 
@@ -49,9 +84,10 @@ CREATE TABLE story_endings_comments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE story_endings_likes (
+CREATE TABLE story_endings_comments_reactions (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    story_endings_id INTEGER REFERENCES story_endings(id) ON DELETE CASCADE,
+    story_endings_comments_id INTEGER REFERENCES story_endings_comments(id) ON DELETE CASCADE,
+    reaction_type VARCHAR(10), -- 'like', 'dislike', or any other reaction type
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
