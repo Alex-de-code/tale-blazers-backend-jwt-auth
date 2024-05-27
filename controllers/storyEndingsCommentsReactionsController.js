@@ -16,20 +16,23 @@ const {
 // ADD CONTROLLER FUNCTIONALITY BELOW HERE -->
 
 // Route to get the reaction count for a specific comment
-story_endings_comments_reactions.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { reaction_type } = req.query;
-  try {
-    const count = await countReactionsForComment(id, reaction_type);
-    res.status(200).json({ count });
-  } catch (error) {
-    res.status(500).json({ error: "Server error" });
+story_endings_comments_reactions.get(
+  "/commendId/reactions",
+  async (req, res) => {
+    const { commentId } = req.params;
+    const { reaction_type } = req.query;
+    try {
+      const count = await countReactionsForComment(commentId, reaction_type);
+      res.status(200).json({ count });
+    } catch (error) {
+      res.status(500).json({ error: "Server error" });
+    }
   }
-});
+);
 
 // post a reaction to story ending
 story_endings_comments_reactions.post(
-  "/",
+  "/:commentId/reactions",
   checkUserReactionToComment,
 
   async (rew, res) => {
@@ -44,22 +47,26 @@ story_endings_comments_reactions.post(
   }
 );
 
-story_endings_comments_reactions.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const deletedStoryEndingCommentReaction = await removeReactionFromComment(
-      id
-    );
-    if (deletedStoryEndingCommentReaction) {
-      res.status(200).json(deletedStoryEndingCommentReaction);
-    } else {
-      res.status(404).json({
-        error: "Story ending comment reaction not found with this ID",
-      });
+story_endings_comments_reactions.delete(
+  "/:commentId/reactions/:reactionId",
+  async (req, res) => {
+    const { commentId, reactionId } = req.params;
+    try {
+      const deletedStoryEndingCommentReaction = await removeReactionFromComment(
+        reactionId,
+        commentId
+      );
+      if (deletedStoryEndingCommentReaction) {
+        res.status(200).json(deletedStoryEndingCommentReaction);
+      } else {
+        res.status(404).json({
+          error: "Story ending comment reaction not found with this ID",
+        });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Server error" });
     }
-  } catch (error) {
-    res.status(500).json({ error: "Server error" });
   }
-});
+);
 
 module.exports = story_endings_comments_reactions;
