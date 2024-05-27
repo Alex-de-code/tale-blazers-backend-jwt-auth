@@ -17,7 +17,7 @@ const {
 
 // Route to get the reaction count for a specific comment
 story_endings_comments_reactions.get(
-  "/commendId/reactions",
+  "/commentId/reactions",
   async (req, res) => {
     const { commentId } = req.params;
     const { reaction_type } = req.query;

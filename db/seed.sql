@@ -58,4 +58,24 @@ VALUES
 (6, 'The sense of closure in this ending was satisfying, but further development of the protagonist’s emotional journey could amplify its impact.', 'feedback', 6, false, NOW()),
 (6, 'The imagery in this ending was fantastic! It felt like I was right there, exploring the haunted ship alongside the protagonist.', 'praise', 1, false, NOW());
 
+-- Likes
+INSERT INTO story_endings_comments_reactions (user_id, story_endings_comments_id, reaction_type, created_at)
+VALUES 
+(2, 1, 'like', NOW()), -- User with id 2 liked the comment with id 1
+(3, 2, 'like', NOW()), -- User with id 3 liked the comment with id 2
+(4, 3, 'like', NOW()), -- User with id 4 liked the comment with id 3
+(5, 4, 'like', NOW()), -- User with id 5 liked the comment with id 4
+(6, 5, 'like', NOW()), -- User with id 6 liked the comment with id 5
+(1, 6, 'like', NOW()), -- User with id 1 liked the comment with id 6
+(2, 7, 'like', NOW()), -- User with id 2 liked the comment with id 7
+(3, 8, 'like', NOW()), -- User with id 3 liked the comment with id 8
+(4, 9, 'like', NOW()); -- User with id 4 liked the comment with id 9
 
+-- Dislikes
+INSERT INTO story_endings_comments_reactions (user_id, story_endings_comments_id, reaction_type, created_at)
+VALUES 
+(3, 1, 'dislike', NOW()), -- User with id 3 disliked the comment with id 1
+(4, 2, 'dislike', NOW()), -- User with id 4 disliked the comment with id 2
+(5, 3, 'dislike', NOW()), -- User with id 5 disliked the comment with id 3
+(6, 3, 'dislike', NOW()), -- User with id 6 disliked the comment with id 3
+(1, 3, 'dislike', NOW()); -- User with id 1 disliked the comment with id 3
