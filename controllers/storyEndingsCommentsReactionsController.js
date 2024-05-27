@@ -52,6 +52,8 @@ story_endings_comments_reactions.post(
 
 story_endings_comments_reactions.delete(
   "/:story_endings_comments_id/reactions/:id",
+  checkUserReactionToComment,
+
   async (req, res) => {
     const { story_endings_comments_id, id } = req.params;
     try {
