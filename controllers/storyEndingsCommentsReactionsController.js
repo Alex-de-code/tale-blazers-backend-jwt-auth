@@ -30,7 +30,7 @@ story_endings_comments_reactions.get(
         story_endings_comments_id
       );
       if (!commentExists) {
-        res
+        return res
           .status(404)
           .json({ error: "There is no existing comment with this ID" });
       }
