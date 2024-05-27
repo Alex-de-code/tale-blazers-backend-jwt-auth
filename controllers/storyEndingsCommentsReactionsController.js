@@ -17,12 +17,15 @@ const {
 
 // Route to get the reaction count for a specific comment
 story_endings_comments_reactions.get(
-  "/commentId/reactions",
+  "/:story_endings_comments_id/reactions",
   async (req, res) => {
     const { story_endings_comments_id } = req.params;
     const { reaction_type } = req.query;
     try {
-      const count = await countReactionsForComment(commentId, reaction_type);
+      const count = await countReactionsForComment(
+        story_endings_comments_id,
+        reaction_type
+      );
       res.status(200).json({ count });
     } catch (error) {
       res.status(500).json({ error: "Server error" });
@@ -32,13 +35,13 @@ story_endings_comments_reactions.get(
 
 // post a reaction to story ending
 story_endings_comments_reactions.post(
-  "/:commentId/reactions",
+  "/:story_endings_comments_id/reactions",
   checkUserReactionToComment,
 
-  async (rew, res) => {
+  async (req, res) => {
     try {
       const newStoryEndingReaction = await addReactionToStoryEndingComment(
-        rew.body
+        req.body
       );
       res.status(201).json(newStoryEndingReaction);
     } catch (error) {
@@ -48,7 +51,7 @@ story_endings_comments_reactions.post(
 );
 
 story_endings_comments_reactions.delete(
-  "/:commentId/reactions/:reactionId",
+  "/:story_endings_comments_id/reactions/:id",
   async (req, res) => {
     const { story_endings_comments_id, id } = req.params;
     try {
