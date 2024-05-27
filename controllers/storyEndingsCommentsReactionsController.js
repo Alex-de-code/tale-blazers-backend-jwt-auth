@@ -26,6 +26,11 @@ story_endings_comments_reactions.get(
         story_endings_comments_id,
         reaction_type
       );
+
+      if (!story_endings_comments_id) {
+        return res.status(404).json({ error: "Comment not found" });
+      }
+
       res.status(200).json({ count });
     } catch (error) {
       res.status(500).json({ error: "Server error" });
