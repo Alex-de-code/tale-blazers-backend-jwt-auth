@@ -16,7 +16,7 @@ const {
 // ADD CONTROLLER FUNCTIONALITY BELOW HERE -->
 
 // Route to get the reaction count for a specific comment
-story_endings_comments.get("/:id", async (req, res) => {
+story_endings_comments_reactions.get("/:id", async (req, res) => {
   const { id } = req.params;
   const { reaction_type } = req.query;
   try {
