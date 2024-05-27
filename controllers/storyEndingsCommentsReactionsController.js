@@ -27,7 +27,7 @@ story_endings_comments_reactions.get(
     const { reaction_type } = req.query;
     try {
       const commentExists = await getSingleCommentByID(
-        story_endings_comments_reactions
+        story_endings_comments_id
       );
       if (!commentExists) {
         res
