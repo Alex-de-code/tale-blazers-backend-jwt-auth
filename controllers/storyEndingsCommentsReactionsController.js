@@ -22,14 +22,13 @@ story_endings_comments_reactions.get(
     const { story_endings_comments_id } = req.params;
     const { reaction_type } = req.query;
     try {
+      if (!story_endings_comments_id) {
+        return res.status(404).json({ error: "Comment not found" });
+      }
       const count = await countReactionsForComment(
         story_endings_comments_id,
         reaction_type
       );
-
-      if (!story_endings_comments_id) {
-        return res.status(404).json({ error: "Comment not found" });
-      }
 
       res.status(200).json({ count });
     } catch (error) {
