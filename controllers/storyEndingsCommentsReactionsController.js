@@ -19,7 +19,7 @@ const {
 story_endings_comments_reactions.get(
   "/commentId/reactions",
   async (req, res) => {
-    const { commentId } = req.params;
+    const { story_endings_comments_id } = req.params;
     const { reaction_type } = req.query;
     try {
       const count = await countReactionsForComment(commentId, reaction_type);
@@ -50,11 +50,11 @@ story_endings_comments_reactions.post(
 story_endings_comments_reactions.delete(
   "/:commentId/reactions/:reactionId",
   async (req, res) => {
-    const { commentId, reactionId } = req.params;
+    const { story_endings_comments_id, id } = req.params;
     try {
       const deletedStoryEndingCommentReaction = await removeReactionFromComment(
-        reactionId,
-        commentId
+        id,
+        story_endings_comments_id
       );
       if (deletedStoryEndingCommentReaction) {
         res.status(200).json(deletedStoryEndingCommentReaction);
