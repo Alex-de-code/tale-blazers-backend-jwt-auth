@@ -8,6 +8,10 @@ const {
   removeReactionFromComment,
 } = require("../queries/story_endings_comments_reactions.js");
 
+const {
+  getSingleCommentByID,
+} = require("../queries/story_endings_comments.js");
+
 // import validatons
 const {
   checkUserReactionToComment,
@@ -22,16 +26,19 @@ story_endings_comments_reactions.get(
     const { story_endings_comments_id } = req.params;
     const { reaction_type } = req.query;
     try {
+      const commentExists = await getSingleCommentByID(
+        story_endings_comments_reactions
+      );
+      if (!commentExists) {
+        res
+          .status(404)
+          .json({ error: "There is no existing comment with this ID" });
+      }
+
       const count = await countReactionsForComment(
         story_endings_comments_id,
         reaction_type
       );
-
-      // If count is null or undefined, the comment does not exist
-      if (count == null) {
-        return res.status(404).json({ error: "Comment not found" });
-      }
-
       res.status(200).json({ count });
     } catch (error) {
       res.status(500).json({ error: "Server error" });
