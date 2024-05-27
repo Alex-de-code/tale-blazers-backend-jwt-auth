@@ -44,6 +44,5 @@ const removeReactionFromComment = async (
 module.exports = {
   addReactionToStoryEndingComment,
   countReactionsForComment,
-  checkUserReactionToComment,
   removeReactionFromComment,
 };

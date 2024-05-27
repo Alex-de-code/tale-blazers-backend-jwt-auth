@@ -5,7 +5,6 @@ const story_endings_comments_reactions = express.Router();
 const {
   addReactionToStoryEndingComment,
   countReactionsForComment,
-  checkUserReactionToComment,
   removeReactionFromComment,
 } = require("../queries/story_endings_comments_reactions.js");
 
