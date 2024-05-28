@@ -20,11 +20,36 @@ const {
 // ADD CONTROLLER FUNCTIONALITY BELOW HERE -->
 
 // Route to get the reaction count for a specific comment
+// story_endings_comments_reactions.get(
+//   "/:story_endings_comments_id/reactions",
+//   async (req, res) => {
+//     const { story_endings_comments_id } = req.params;
+//     const { reaction_type } = req.query;
+//     try {
+//       const commentExists = await getSingleCommentByID(
+//         story_endings_comments_id
+//       );
+//       if (!commentExists) {
+//         return res
+//           .status(404)
+//           .json({ error: "There is no existing comment with this ID" });
+//       }
+
+//       const count = await countReactionsForComment(
+//         story_endings_comments_id,
+//         reaction_type
+//       );
+//       res.status(200).json({ count });
+//     } catch (error) {
+//       res.status(500).json({ error: "Server error" });
+//     }
+//   }
+// );
+
 story_endings_comments_reactions.get(
   "/:story_endings_comments_id/reactions",
   async (req, res) => {
     const { story_endings_comments_id } = req.params;
-    const { reaction_type } = req.query;
     try {
       const commentExists = await getSingleCommentByID(
         story_endings_comments_id
@@ -35,11 +60,8 @@ story_endings_comments_reactions.get(
           .json({ error: "There is no existing comment with this ID" });
       }
 
-      const count = await countReactionsForComment(
-        story_endings_comments_id,
-        reaction_type
-      );
-      res.status(200).json({ count });
+      const counts = await countReactionsForComment(story_endings_comments_id);
+      res.status(200).json(counts);
     } catch (error) {
       res.status(500).json({ error: "Server error" });
     }

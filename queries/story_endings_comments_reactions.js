@@ -13,13 +13,15 @@ const addReactionToStoryEndingComment = async (reaction) => {
   }
 };
 
-const countReactionsForComment = async (comment_id, reaction_type) => {
+const countReactionsForComment = async (comment_id) => {
   try {
-    const count = await db.one(
-      "SELECT COUNT(*) FROM story_endings_comments_reactions WHERE story_endings_comments_id = $1 AND reaction_type = $2",
-      [comment_id, reaction_type]
+    const counts = await db.one(
+      "SELECT \
+        (SELECT COUNT(*) FROM story_endings_comments_reactions WHERE story_endings_comments_id = $1 AND reaction_type = 'like') as like_count, \
+        (SELECT COUNT(*) FROM story_endings_comments_reactions WHERE story_endings_comments_id = $1 AND reaction_type = 'dislike') as dislike_count",
+      [comment_id]
     );
-    return count.count;
+    return counts;
   } catch (error) {
     return error;
   }
