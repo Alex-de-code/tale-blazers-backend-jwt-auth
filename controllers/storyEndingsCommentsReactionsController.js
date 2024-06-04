@@ -46,6 +46,7 @@ const {
 //   }
 // );
 
+// Route to get the reaction count for a specific comment
 story_endings_comments_reactions.get(
   "/:story_endings_comments_id/reactions",
   async (req, res) => {
@@ -59,7 +60,6 @@ story_endings_comments_reactions.get(
           .status(404)
           .json({ error: "There is no existing comment with this ID" });
       }
-
       const counts = await countReactionsForComment(story_endings_comments_id);
       res.status(200).json(counts);
     } catch (error) {
