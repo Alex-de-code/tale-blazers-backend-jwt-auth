@@ -48,7 +48,7 @@ const {
 
 // Route to get the reaction count for a specific comment
 story_endings_comments_reactions.get(
-  "/:story_endings_comments_id/reactions",
+  "/:story_endings_comments_id",
   async (req, res) => {
     const { story_endings_comments_id } = req.params;
     try {
@@ -68,9 +68,9 @@ story_endings_comments_reactions.get(
   }
 );
 
-// post a reaction to story ending
+// post a reaction to story ending comment
 story_endings_comments_reactions.post(
-  "/:story_endings_comments_id/reactions",
+  "/:story_endings_comments_id",
   checkUserReactionToComment,
 
   async (req, res) => {
@@ -86,7 +86,7 @@ story_endings_comments_reactions.post(
 );
 
 story_endings_comments_reactions.delete(
-  "/:story_endings_comments_id/reactions/:id",
+  "/:story_endings_comments_id/delete/:id",
   checkUserReactionToComment,
 
   async (req, res) => {
