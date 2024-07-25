@@ -88,6 +88,6 @@ CREATE TABLE story_endings_comments_reactions (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     story_endings_comments_id INTEGER REFERENCES story_endings_comments(id) ON DELETE CASCADE,
-    reaction_type VARCHAR(10), -- 'like', 'dislike', or any other reaction type
+    reaction_type VARCHAR(10), -- 'like', 'dislike',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
