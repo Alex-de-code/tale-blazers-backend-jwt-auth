@@ -35,3 +35,47 @@ VALUES
 ('Return to Earth', 'With a sense of awe and wonder, I returned home, forever changed by my encounter with extraterrestrial life. The universe had become a much bigger place, filled with wonders beyond imagining. Though my journey among the stars had been brief, it had left an indelible mark upon my soul, filling me with a sense of wonder and possibility that I had never known before. And as I stepped back onto familiar soil, I knew that I carried with me the knowledge that I was.', '2024-04-07 14:00:00', 5, 1),
 ('Contemplation of the Cosmos', 'As I looked up at the stars, I couldn`t help but wonder what other worlds were out there, waiting to be explored. The adventure was just beginning. With a sense of anticipation and excitement, I gazed into the endless expanse of space, knowing that countless mysteries awaited discovery. Though my journey had brought me back to Earth, my spirit soared among the stars, ready to chart a course through the cosmos and explore the unknown.', '2024-04-07 14:30:00', 5, 2),
 ('Embarking on the Cosmic Journey', 'With a newfound sense of purpose, I set off into the unknown, eager to explore the cosmos and discover what lies beyond. As I boarded the spacecraft and felt the engines roar to life, I knew that I was embarking on the adventure of a lifetime. The stars beckoned to me, promising untold wonders and endless possibilities. With each passing moment, I left behind the familiar confines of Earth and soared towards the infinite expanse of the universe, ready to write my own destiny among the stars.', '2024-04-07 15:00:00', 5, 3);
+
+-- Inserting story endings comments data
+INSERT INTO story_endings_comments (story_endings_id, body, tag, user_id, is_flagged, created_at)
+VALUES 
+(1, 'Wow, what an exhilarating conclusion! I loved the sense of adventure and discovery throughout the story.', 'praise', 2, false, NOW()),
+(1, 'The description of the ancient artifact and its power was vivid, but the conclusion felt somewhat rushed.', 'feedback', 3, false, NOW()),
+(1, 'I enjoyed how you left room for the imagination to fill in the blanks. Great job!', 'praise', 4, false, NOW()),
+(2, 'The mystical energy described in this ending was captivating, yet the pacing could be improved to sustain the reader’s interest.', 'feedback', 5, false, NOW()),
+(2, 'I appreciated the attention to detail in describing the magical elements. It really brought the story to life.', 'praise', 6, false, NOW()),
+(2, 'While leaving the reader wanting more is a sign of engagement, providing closure could strengthen the narrative.', 'feedback', 1, false, NOW()),
+(3, 'The ending was bittersweet and left me with a sense of longing. I hope to see more from this story in the future.', 'praise', 2, false, NOW()),
+(3, 'The emotional depth in this ending was commendable, yet the conclusion seemed abrupt given the complexity of the journey.', 'feedback', 3, false, NOW()),
+(3, 'The promise of future adventures kept me on the edge of my seat until the very end. Well done!', 'praise', 4, false, NOW()),
+(4, 'This ending was thought-provoking and made me reconsider the impact of our actions on history.', 'praise', 5, false, NOW()),
+(4, 'The twist added complexity to the story, yet its execution could be refined to avoid confusion.', 'feedback', 6, false, NOW()),
+(4, 'While the idea of rewriting history is fascinating, the resolution could benefit from clearer implications.', 'feedback', 1, false, NOW()),
+(5, 'The concept of advanced technology was intriguing, but its integration into the narrative felt somewhat forced.', 'feedback', 2, false, NOW()),
+(5, 'I loved how this ending tied back to the theme of scientific discovery. It was a fitting conclusion to the story.', 'praise', 3, false, NOW()),
+(5, 'The description of the advanced technology was incredibly detailed and painted a vivid picture in my mind.', 'praise', 4, false, NOW()),
+(6, 'The haunting atmosphere of the ghost ship was expertly portrayed in this ending. It sent shivers down my spine!', 'praise', 5, false, NOW()),
+(6, 'The sense of closure in this ending was satisfying, but further development of the protagonist’s emotional journey could amplify its impact.', 'feedback', 6, false, NOW()),
+(6, 'The imagery in this ending was fantastic! It felt like I was right there, exploring the haunted ship alongside the protagonist.', 'praise', 1, false, NOW());
+
+-- Likes
+INSERT INTO story_endings_comments_reactions (user_id, story_endings_comments_id, reaction_type, created_at)
+VALUES 
+(2, 1, 'like', NOW()), -- User with id 2 liked the comment with id 1
+(3, 2, 'like', NOW()), -- User with id 3 liked the comment with id 2
+(4, 3, 'like', NOW()), -- User with id 4 liked the comment with id 3
+(5, 4, 'like', NOW()), -- User with id 5 liked the comment with id 4
+(6, 5, 'like', NOW()), -- User with id 6 liked the comment with id 5
+(1, 6, 'like', NOW()), -- User with id 1 liked the comment with id 6
+(2, 7, 'like', NOW()), -- User with id 2 liked the comment with id 7
+(3, 8, 'like', NOW()), -- User with id 3 liked the comment with id 8
+(4, 9, 'like', NOW()); -- User with id 4 liked the comment with id 9
+
+-- Dislikes
+INSERT INTO story_endings_comments_reactions (user_id, story_endings_comments_id, reaction_type, created_at)
+VALUES 
+(3, 1, 'dislike', NOW()), -- User with id 3 disliked the comment with id 1
+(4, 2, 'dislike', NOW()), -- User with id 4 disliked the comment with id 2
+(5, 3, 'dislike', NOW()), -- User with id 5 disliked the comment with id 3
+(6, 3, 'dislike', NOW()), -- User with id 6 disliked the comment with id 3
+(1, 3, 'dislike', NOW()); -- User with id 1 disliked the comment with id 3

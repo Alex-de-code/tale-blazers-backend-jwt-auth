@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 const authController = require("./controllers/authController");
 const storyBeginningsController = require("./controllers/storyBeginningsController");
 const storyEndingsController = require("./controllers/storyEndingsController");
+const storyEndingsCommentsController = require("./controllers/storyEndingsCommentsController");
+const storyEndingsCommentsReactionsController = require("./controllers/storyEndingsCommentsReactionsController");
 
 // CONFIGURATION
 const app = express();
@@ -22,8 +24,7 @@ const app = express();
 // MIDDLEWARE change origin to your frontend netlify address for deployment
 app.use(
   cors({
-    // origin: "http://localhost:3000",
-    origin: "https://taleblazers.netlify.app",
+    origin: ["http://localhost:3000", "https://taleblazers.netlify.app"],
   })
 );
 app.use(express.json());
@@ -32,6 +33,11 @@ app.use(cookieParser());
 app.use("/api/auth", authController);
 app.use("/api/story_beginnings", storyBeginningsController);
 app.use("/api/story_endings", storyEndingsController);
+app.use("/api/story_endings/comments", storyEndingsCommentsController);
+app.use(
+  "/api/story_endings/comments/reactions",
+  storyEndingsCommentsReactionsController
+);
 
 // ROUTES
 app.get("/", (_req, res) => {
