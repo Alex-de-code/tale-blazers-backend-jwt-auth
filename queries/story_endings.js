@@ -82,6 +82,82 @@ const updateStoryEndingsbyId = async (id, story_ending) => {
   }
 };
 
+// Check if the user has already liked the story ending
+const checkUserReaction = async (user_id, story_endings_id) => {
+  try {
+    const reaction = await db.oneOrNone(
+      "SELECT * FROM story_endings_reactions WHERE user_id = $1 AND story_endings_id = $2",
+      [user_id, story_endings_id]
+    );
+    return reaction; // If reaction exists, it will be returned, otherwise `null`
+  } catch (error) {
+    return error;
+  }
+};
+
+// Add a reaction for a story ending
+const addReaction = async (user_id, story_endings_id) => {
+  try {
+    // Check if the user has already reacted
+    const existingReaction = await checkUserReaction(user_id, story_endings_id);
+
+    if (existingReaction) {
+      return { message: "User has already reacted to this story ending" }; // Optionally return a message
+    }
+
+    // Add a new like reaction
+    const newReaction = await db.one(
+      "INSERT INTO story_endings_reactions (user_id, story_endings_id, reaction_type) VALUES($1, $2, $3) RETURNING *",
+      [user_id, story_endings_id, "like"]
+    );
+    return newReaction;
+  } catch (error) {
+    return error;
+  }
+};
+
+// Remove a reaction (or "unlike") from a story ending
+const removeReaction = async (user_id, story_endings_id) => {
+  try {
+    // Check if the user has liked the story ending
+    const existingReaction = await checkUserReaction(user_id, story_endings_id);
+
+    if (!existingReaction) {
+      return { message: "User has not liked this story ending yet" };
+    }
+
+    // Remove the like reaction
+    const removedReaction = await db.one(
+      "DELETE FROM story_endings_reactions WHERE user_id = $1 AND story_endings_id = $2 RETURNING *",
+      [user_id, story_endings_id]
+    );
+    return removedReaction;
+  } catch (error) {
+    return error;
+  }
+};
+
+// Update the reaction for a story ending (e.g., change from 'dislike' to 'like')
+const updateReaction = async (user_id, story_endings_id, new_reaction_type) => {
+  try {
+    // Check if the user has reacted
+    const existingReaction = await checkUserReaction(user_id, story_endings_id);
+
+    if (!existingReaction) {
+      return { message: "User has not reacted to this story ending yet" };
+    }
+
+    // Update the reaction type
+    const updatedReaction = await db.one(
+      "UPDATE story_endings_reactions SET reaction_type = $1 WHERE user_id = $2 AND story_endings_id = $3 RETURNING *",
+      [new_reaction_type, user_id, story_endings_id]
+    );
+    return updatedReaction;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getAllStoryEndings,
   getStoryEndingsByStoryBeginningId,
@@ -89,4 +165,8 @@ module.exports = {
   deleteStoryEndingById,
   updateStoryEndingsbyId,
   getSingleStoryEndingByID,
+  checkUserReaction,
+  addReaction,
+  removeReaction,
+  updateReaction,
 };

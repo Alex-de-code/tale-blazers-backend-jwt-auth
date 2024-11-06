@@ -9,6 +9,10 @@ const {
   deleteStoryEndingById,
   updateStoryEndingsbyId,
   getSingleStoryEndingByID,
+  checkUserReaction,
+  addReaction,
+  removeReaction,
+  updateReaction,
 } = require("../queries/story_endings.js");
 
 // import validatons
