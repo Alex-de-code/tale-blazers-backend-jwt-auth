@@ -9,6 +9,10 @@ const {
   deleteStoryEndingById,
   updateStoryEndingsbyId,
   getSingleStoryEndingByID,
+  checkUserReaction,
+  addReaction,
+  removeReaction,
+  updateReaction,
 } = require("../queries/story_endings.js");
 
 // import validatons
@@ -109,5 +113,68 @@ story_endings.put(
     }
   }
 );
+
+// Add a reaction (like, love, etc.) to a story ending
+story_endings.post("single/:id/reaction", async (req, res) => {
+  const { id } = req.params;
+  const { user_id, reaction_type } = req.body;
+
+  // Validate reaction type (optional but recommended for user input validation)
+  if (
+    !["like", "dislike", "love", "funny", "sad", "angry"].includes(
+      reaction_type
+    )
+  ) {
+    return res.status(400).json({ error: "Invalid reaction type" });
+  }
+
+  try {
+    const result = await addReaction(user_id, id, reaction_type);
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Remove a reaction (unlike, undo reaction) from a story ending
+story_endings.delete("single/:id/reaction", async (req, res) => {
+  const { id } = req.params;
+  const { user_id } = req.body;
+
+  try {
+    const result = await removeReaction(user_id, id);
+    if (result.message) {
+      return res.status(404).json({ error: result.message });
+    }
+    res.status(200).json({ message: "Reaction removed successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Update a reaction (change reaction type) for a story ending
+story_endings.put("single/:id/reaction", async (req, res) => {
+  const { id } = req.params;
+  const { user_id, reaction_type } = req.body;
+
+  // Validate reaction type (optional but recommended for user input validation)
+  if (
+    !["like", "dislike", "love", "funny", "sad", "angry"].includes(
+      reaction_type
+    )
+  ) {
+    return res.status(400).json({ error: "Invalid reaction type" });
+  }
+
+  try {
+    const result = await updateReaction(user_id, id, reaction_type);
+    if (result.message) {
+      return res.status(404).json({ error: result.message });
+    }
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 module.exports = story_endings;

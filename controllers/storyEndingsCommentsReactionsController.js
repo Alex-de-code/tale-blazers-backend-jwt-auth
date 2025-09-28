@@ -47,6 +47,7 @@ const {
 // );
 
 // Route to get the reaction count for a specific comment
+
 story_endings_comments_reactions.get(
   "/:story_endings_comments_id",
   async (req, res) => {
@@ -85,22 +86,94 @@ story_endings_comments_reactions.post(
   }
 );
 
-story_endings_comments_reactions.delete(
-  "/:story_endings_comments_id/delete/:id",
-  checkUserReactionToComment,
+// Unified endpoint for adding, updating, or deleting reactions
+// story_endings_comments_reactions.post(
+//   "/:story_endings_comments_id",
+//   checkUserReactionToComment,
+//   async (req, res) => {
+//     const { story_endings_comments_id } = req.params;
+//     const { user_id, reaction_type } = req.body;
 
+//     try {
+//       // Check if the user already has a reaction to this comment
+//       const existingReaction = await findUserReaction(
+//         user_id,
+//         story_endings_comments_id
+//       );
+
+//       if (existingReaction) {
+//         // User has reacted before
+//         if (existingReaction.reaction_type === reaction_type) {
+//           // Remove reaction if it's the same
+//           await removeReactionFromComment(
+//             existingReaction.id,
+//             story_endings_comments_id
+//           );
+//           return res.status(200).json({ message: "Reaction removed." });
+//         } else {
+//           // Update reaction if it's different
+//           await addReactionToStoryEndingComment({
+//             user_id,
+//             story_endings_comments_id,
+//             reaction_type,
+//           });
+//           return res.status(200).json({ message: "Reaction updated." });
+//         }
+//       } else {
+//         // User is reacting for the first time
+//         const newReaction = await addReactionToStoryEndingComment({
+//           user_id,
+//           story_endings_comments_id,
+//           reaction_type,
+//         });
+//         return res.status(201).json(newReaction);
+//       }
+//     } catch (error) {
+//       res.status(500).json({ error: "Internal server error" });
+//     }
+//   }
+// );
+
+// story_endings_comments_reactions.delete(
+//   "/:story_endings_comments_id/delete/:id", // this is user ID
+//   checkUserReactionToComment,
+
+//   async (req, res) => {
+//     const { story_endings_comments_id, id } = req.params;
+//     try {
+//       const deletedStoryEndingCommentReaction = await removeReactionFromComment(
+//         id,
+//         story_endings_comments_id
+//       );
+//       if (deletedStoryEndingCommentReaction) {
+//         res.status(200).json(deletedStoryEndingCommentReaction);
+//       } else {
+//         res.status(404).json({
+//           error: "Story ending comment reaction not found with this ID",
+//         });
+//       }
+//     } catch (error) {
+//       res.status(500).json({ error: "Server error" });
+//     }
+//   }
+// );
+
+// Route to delete a user's reaction to a specific comment
+story_endings_comments_reactions.delete(
+  "/:story_endings_comments_id/delete/:user_id", // this is user ID
+  checkUserReactionToComment,
   async (req, res) => {
-    const { story_endings_comments_id, id } = req.params;
+    const { story_endings_comments_id, user_id } = req.params;
     try {
-      const deletedStoryEndingCommentReaction = await removeReactionFromComment(
-        id,
+      const deletedReaction = await removeReactionFromComment(
+        user_id,
         story_endings_comments_id
       );
-      if (deletedStoryEndingCommentReaction) {
-        res.status(200).json(deletedStoryEndingCommentReaction);
+      if (deletedReaction) {
+        return res.status(200).json({ message: "Reaction deleted." });
       } else {
-        res.status(404).json({
-          error: "Story ending comment reaction not found with this ID",
+        return res.status(404).json({
+          error: "No reaction found for this user on the specified comment.",
         });
       }
     } catch (error) {
